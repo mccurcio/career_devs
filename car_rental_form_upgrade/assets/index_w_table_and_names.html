@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <!-- jQuery 3.2.1 - minified -->
+  <script src="index_center_biased_grid_files/jquery-3.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
+  <!-- GOOGLE FONTS -->
+  <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+  <style>
+  body {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 16px;
+  }
+
+  select {
+    text-align: center;
+    text-align-last: center;
+  }
+
+  option {
+    text-align: center;
+    text-align-last: center;
+  }
+  </style>
+</head>
+
+<body>
+  <!-- NAVBAR ######################################## -->
+  <div class="container-fluid">
+    <div class="row container-fluid">
+      <div class="col-xs-12">
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <a class="navbar-brand" href="#">Matt's Car Rental</a>
+            </div>
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="#">Home</a></li>
+              <li><a href="#locations">Our Locations</a></li>
+              <li><a href="#cars">Our Cars</a></li>
+              <li><a href="#specials">Special Deals!</a></li>
+              <li><a href="#contact">Contact Us</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="#"><span class="glyphicon glyphicon-user"></span>Sign Up</a></li>
+              <li><a href="#"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <!-- DIRECTIONS, ROWS 1-2 ########################### -->
+  <div class="container">
+    <div class="col-sm-12">
+      <h2>You have reached the car rental page.</h2>
+      <h3>Step #1: Choose your type of car from the dropdown menu.</h3>
+      <br>
+    </div>
+  </div>
+  <!-- ROW #3 - DAYS & CAR DROPDOWNS ##################### -->
+  <div class="container">
+    <div class="row container">
+      <div class="col-xs-12">
+        <div class="container">
+          <form id="carType" name="carType">
+          <input type="dropdown" id="carType">
+            <select id="carType" name="carType" onchange="adjustNums()">
+              <option style="display:none;" selected="selected">Car Type Desired</option>
+              <option id="Econ"><!-- Econ title --></option>
+              <option id="Mids"><!-- Mids title --></option>
+              <option id="Lux"><!-- Lux title --></option>
+            </select>
+          </form>
+          <br>
+          <br>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ROW #4 - FIRST_LAST_NAMES - FORM ##################### -->
+  <div class="container">
+    <div class="col-xs-12">
+      <h3>Step #2: Enter your name.</h3>
+      <br>
+      <div class="form-group row">
+        <form name="form2" class="form-inline" enctype="text/plain" id="form2">
+          <div class="form-group">
+            <label>First Name:</label>
+            <input placeholder="Enter First Name" method="post" id="fName" name="fName" required="" type="text">
+          </div>
+          <div class="form-group">
+            <label>Family Name:</label>
+            <input placeholder="Enter Family Name" method="post" id="famName" name="famName" required="" type="text">
+          </div>
+          <button type="submit" onclick="customerInfo()" value="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- ROW #5 - CAR TABLE / INFORMATION ############## -->
+  <div class="container">
+    <div class="col-sm-12">
+      <h3>Today we have:</h3>
+      <!-- TABLE OF CARS #############################-->
+      <div class="container">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Car Type</th>
+              <th>Car(s) Remaining</th>
+              <th>Revenue per Day</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Economy</td>
+              <td><span id="carsEconNum"></span></td>
+              <td><span id="econTotal"></span></td>
+            </tr>
+            <tr>
+              <td>Mid-Size</td>
+              <td><span id="carsMidsNum"></span></td>
+              <td><span id="midsTotal"></span></td>
+            </tr>
+            <tr>
+              <td>Luxury</td>
+              <td><span id="carsLuxNum"></span></td>
+              <td><span id="luxTotal"></span></td>
+            </tr>
+            <tr>
+              <td>TOTALS</td>
+              <td><span id="inventoryOut"></span></td>
+              <td><span id="revenueTotal"></span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- END OF TABLE ##############################-->
+    </div>
+  </div>
+  <!-- SCRIPTS - FUNCTIONS ##################### -->
+  <script>
+  // INITIALIZE VAUES IN TABLE
+  var customer = {fName:"", famName:""};
+  var revenue = {econ:0, mids:0, lux:0};
+  var inventoryOut = 0;
+
+  // // Car(s) Remaining
+  // document.getElementById("carsEconNum").innerHTML = cars.econNum;
+  // document.getElementById("carsMidsNum").innerHTML = cars.midsNum;
+  // document.getElementById("carsLuxNum").innerHTML = cars.luxNum;
+  // // Revenue per Day
+  // document.getElementById("econTotal").innerHTML = revenue.econ;
+  // document.getElementById("midsTotal").innerHTML = revenue.mids;
+  // document.getElementById("luxTotal").innerHTML = revenue.lux;
+
+  
+
+  // SHOW ALERT: CHOOSE ANOTHER *****NEED****** 
+  function ChooseAnotherAlert(){alert("Please Choose another car type.")}
+    
+
+  // DETERMINE CAR(s) REMAINING & REVENUE
+  function adjustNums() {
+    var carType = document.getElementById("carType").value;
+    switch (carType) {
+      case: Econ: // -1 from econNum & add econCost
+        if (cars.econNum == 0){ChooseAnotherAlert()} 
+          else {cars.econNum -= 1;
+                document.getElementById("carsEconNum").innerHTML = cars.econNum;
+                document.getElementById("econTotal").innerHTML = (revenue.econ += cars.econCost);
+               }
+      break;
+      case "Mids": // case Mids: -1 from midsNum & add midsCost
+        if (cars.MidsNum == 0){ChooseAnother()} 
+          else {cars.midsNum -= 1;
+                document.getElementById("carsMidsNum").innerHTML = cars.midsNum;
+                document.getElementById("midsTotal").innerHTML = (revenue.mids += cars.midsCost);
+               }
+      break;
+      case "Lux": // case Lux: -1 from luxNum & add luxCost
+        if (cars.luxNum == 0){ChooseAnother()} 
+          else {cars.luxNum -= 1;
+                document.getElementById("carsLuxNum").innerHTML = cars.luxNum;
+                document.getElementById("luxTotal").innerHTML = (revenue.lux += cars.luxCost);
+                }
+      break;
+    }
+      revenueTotal = revenue.econ + revenue.mids + revenue.lux;
+      document.getElementById("revenueTotal").innerHTML ="US$ " + revenueTotal;
+      inventoryOut += 1;
+      document.getElementById("inventoryOut").innerHTML = inventoryOut + " Cars Rented";
+  }
+  </script>
+  <script src="scripts/index.js"></script>
+</body>
+
+</html>

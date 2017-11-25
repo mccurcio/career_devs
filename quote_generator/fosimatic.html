@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <!-- jQuery 3.2.1 - minified -->
+  <script src="index_center_biased_grid_files/jquery-3.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
+  <!-- GOOGLE FONTS -->
+  <link href="https://fonts.googleapis.com/css?family=IM+Fell+English" rel="stylesheet">
+  <style>
+  body {
+    font-family: 'IM Fell English', serif;
+  }
+  </style>
+</head>
+
+<body>
+  <section class="container-fluid">
+    <div class="row">
+      <div class="col-sm-4"></div>
+      <div class="col-sm-4">
+        <center>
+          <h1>Thoughts</h1></center>
+      </div>
+      <div class="col-sm-4"></div>
+    </div>
+    <div class="row">
+      <div class="col-sm-2"></div>
+      <div class="col-sm-4">
+        <h2>These quotes are in Russian, a beautifully written language.</h2>
+      </div>
+      <div class="col-sm-4">
+        <h2>This box contains a translation by Google.</h2>
+      </div>
+      <div class="col-sm-2"></div>
+    </div>
+    <div class="row">
+      <div class="col-sm-2"></div>
+      <div class="col-sm-4">
+        <div class="well">
+          <h2 class="quote-text"></h2>
+          <h4 class="author-text"></h4>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="well">
+          <h2 class="translation" id="translation"></h2>
+          <h4 class="author-text"></h4>
+        </div>
+      </div>
+      <div class="col-sm-2"></div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4"></div>
+      <div class="col-sm-4">
+        <center>
+          <button type="button" class="btn btn-primary" id="quote">A New Thought</button>
+          <a class="twitter-share-button" href="https://twitter.com/intent/tweet" data-size="large"
+            target="_blank">
+            <button type="button" class="btn btn-primary">Tweet This Thought</button>
+          </a>
+        </center>
+      </div>
+      <div class="col-sm-4"></div>
+    </div>
+  </section>
+
+  <script type="text/javascript">
+  // RUSSIAN QUOTE #########################
+  var url =
+    "https://api.forismatic.com/api/1.0/?method=getQuote&key1&format=jsonp&lang=ru&jsonp=?";
+  var getQuote = function(data) {
+    $(".quote-text").text(data.quoteText);
+    var quot = 'https://twitter.com/intent/tweet?text=' + data.quoteText +
+      ' By ' + data.quoteAuthor;
+    if (data.quoteAuthor === ''){data.quoteAuthor = 'x'};
+    $(".author-text").text(data.quoteAuthor);
+    $(".twitter-share-button").attr("href", quot);
+  };
+  $(document).ready(function() {$.getJSON(url, getQuote, 'jsonp')});
+  $("#quote").click(function() {$.getJSON(url, getQuote, 'jsonp')});
+
+  // ENGLISH TRANSLATION ######################
+  // Imports the Google Cloud client library
+
+// [START translate_quickstart]
+// Imports the Google Cloud client library
+const Translate = require('@google-cloud/translate');
+
+// Your Google Cloud Platform project ID
+const projectId = 'AIzaSyAoQV5TiJYfsZ_uVoJYLLg-Ppz71vMaCFE';
+
+// Instantiates a client
+const translate = new Translate({
+  projectId: projectId,
+});
+
+// The text to translate
+var text = getQuote;
+// The target language
+const target = 'en';
+
+// Translates text into Russian
+translate
+  .translate(text, target)
+  .then(results => {
+    const translation = results[0];
+
+    //console.log(`Text: ${text}`);
+    console.log(`Translation: ${translation}`);
+    document.getElementById("translation") = translation
+  })
+  .catch(err => {
+    console.error('ERROR:', err);
+  });
+// [END translate_quickstart]
+
+  //AIzaSyB77ku13SvzFjoUXxc0lhJH1MIwUc7-dq0
+
+  //AIzaSyAoQV5TiJYfsZ_uVoJYLLg-Ppz71vMaCFE
+  </script>
+</body>
+
+</html>

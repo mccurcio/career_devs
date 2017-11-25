@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+
+   <h2>Save Electricty!</h2><br>
+   <img id="demo2" src="https://images-na.ssl-images-amazon.com/images/I/41divnkkBVL._SL500_AC_SS350_.jpg" alt="lightbulb">
+   <br><br>
+</form>
+
+<p>Click "Try it"</p>
+
+<button onclick="myFunction()">Try it</button>
+
+<script>
+function myFunction() {
+  document.getElementsById("demo2").src="https://images-na.ssl-images-amazon.com/images/I/31YTbFv6TRL._SL500_AC_SS350_.jpg";
+}
+</script>
+
+</body>
+</html>

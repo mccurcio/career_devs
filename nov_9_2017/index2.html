@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<meta content="ie=edge" http-equiv="X-UA-Compatible">
+	<title>Document</title>
+</head>
+<body>
+	<h1>Hotel Name</h1>
+	<p id="hotelname"></p>
+	<h3>Total Rooms</h3>
+	<p id="rooms"></p>
+	<h3>Rooms Available</h3>
+	<p id="roomsavail"></p><button onclick="hotelinfo()" type="button">Rooms</button>
+	<script>
+	          var hotel = {name: "Biltmore",
+	                       totalRooms: 500,
+	                       roomsBooked: 150,
+	                       roomService: true,
+	                       gym: false,
+	                       restaurant:"yes",
+	                       businessOffice:"yes"}
+
+	      function hotelinfo() {
+	      document.getElementById("hotelname").innerHTML = hotel.name;
+	      document.getElementById("rooms").innerHTML = hotel.totalRooms;
+	      document.getElementById("roomsavail").innerHTML = hotel.totalRooms - hotel.roomsBooked;
+	      }
+	</script>
+</body>
+</html>
