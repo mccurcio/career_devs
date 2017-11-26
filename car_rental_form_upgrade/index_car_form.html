@@ -91,16 +91,12 @@
       <h3>Step #2: Enter your name.</h3>
       <br>
       <div class="form-group row">
-        <form name="form" class="form-inline" enctype="text/plain" id="recordName">
+        <form name="form" class="form" enctype="text/plain" id="recordName">
           <div class="form-group">
             <label>First Name:</label>
             <input placeholder="Enter First Name" method="post" id="fName" name="fName" required="" type="text">
-          </div>
-          <div class="form-group">
-            <label>Family Name:</label>
-            <input placeholder="Enter Family Name" method="post" id="famName" name="famName" required="" type="text">
-          </div>
           <button type="submit" onclick="customerInfo()" value="submit">Submit</button>
+          </div>
         </form>
       </div>
     </div>
@@ -116,7 +112,7 @@
             <tr>
               <th>Car Type</th>
               <th>Car(s) Remaining</th>
-              <th>Revenue per Day</th>
+              <th>Cost per Day</th>
             </tr>
           </thead>
           <tbody>
@@ -165,7 +161,7 @@
   <!-- SCRIPTS - FUNCTIONS ##################### -->
   <script>
   // SET INITIAL VALUES
-  var customer = { fName: "", famName: "" };
+  var customer = { fName: "" };
   var cars = {
     econNum: 5,
     midsNum: 10,
@@ -193,16 +189,13 @@
 
   // Get FIRST_LAST_NAMES from form
   function customerInfo() {
-    var carType = document.forms["carType"]["value"].value;
+    var choices = ("Econ", "Mids", "Lux")
+    var carType = document.getElementById("carType").value;
     var firstName = document.forms["form"]["fName"].value;
-    var LastName = document.forms["form"]["famName"].value;
     customer.fName.push(firstName);
-    customer.FamName.push(LastName);
-    if (carType == "blank") {
-      alert("Please select type");
-    }
-    if (customer.fName.length == 0 & customer.FamName.length == 0) {
-      alert("Please Fill in your Name.");
+    if (!(id in choices)) {alert("Please select car type")}
+    if (customer.fName.length == 0) {
+      alert("Please fill in your Name.");
     } else {
       alert("Thank you for your order.");
     }
