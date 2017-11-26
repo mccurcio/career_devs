@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+  table,
+  th,
+  td {
+    border: 1px solid black;
+  }
+  </style>
+</head>
+
+<body>
+  <h2>You have reached the car rental page.</h2>
+  <h4>Step #1: Choose your type of car from the dropdown menu.</h4>
+  <select size="1" id="carType" name="carType">
+    <option value=""> Choose Car Type: </option>
+    <option value="EC">Economy at $50/day</option>
+    <option value="MID">Mid-Sized at $100/day</option>
+    <option value="LX">Luxury at $200/day</option>
+  </select>
+  <br>
+  <br>
+  <table>
+    <thead>
+      <tr>
+        <th>Car Type</th>
+        <th>Car(s) Remaining</th>
+        <th>Cost per Day</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Economy</td>
+        <td>
+          <p id="carsEconNum"></p>
+        </td>
+        <td>
+          <p id="econTotal"></p>
+        </td>
+      </tr>
+      <tr>
+        <td>Mid-Size</td>
+        <td>
+          <p id="carsMidsNum"></p>
+        </td>
+        <td>
+          <p id="midsTotal"></p>
+        </td>
+      </tr>
+      <tr>
+        <td>Luxury</td>
+        <td>
+          <p id="carsLuxNum"></p>
+        </td>
+        <td>
+          <p id="luxTotal"></p>
+        </td>
+      </tr>
+      <tr>
+        <td>TOTALS</td>
+        <td>
+          <p id="inventoryOut"></p>
+        </td>
+        <td>
+          <p id="revenueTotal"></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- START SCRIPTS #############-->
+  <script type="text/javascript">
+  // INITIALIZE VAUES IN TABLE
+  var customer = { Name: "" };
+  var cars = {
+    econNum: 5,
+    midsNum: 10,
+    luxNum: 2,
+    econCost: 50,
+    midsCost: 100,
+    luxCost: 200
+  };
+  var revenue = { econ: 0, mids: 0, lux: 0 };
+  var inventoryOut = 0;
+
+  // DOM for table
+  // Car(s) Remaining
+  document.getElementById("carsEconNum").innerHTML = cars.econNum
+  document.getElementById("carsMidsNum").innerHTML = cars.midsNum
+  document.getElementById("carsLuxNum").innerHTML = cars.luxNum
+  // Revenue per Day
+  document.getElementById("econTotal").innerHTML = revenue.econ;
+  document.getElementById("midsTotal").innerHTML = revenue.mids;
+  document.getElementById("luxTotal").innerHTML = revenue.lux;
+
+  // Flash alert
+  function flashAlert() {
+    alert("Please choose another car type.");
+  }
+
+
+  var selected_index = oForm.elements["carType"].selectedIndex;
+  if (selected_index > 0) {
+    var selected_option_value = oForm.elements["carType"].options[
+      selected_index].value;
+    var selected_option_text = oForm.elements["carType"].options[selected_index]
+      .text;
+  } else {
+    alert('Please select a car type from the drop down list');
+  }
+
+  /* When the user clicks on the button, 
+  toggle between hiding and showing the dropdown content */
+  function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+  }
+
+  // Close the dropdown if the user clicks outside of it
+  window.onclick = function(event) {
+    if (!event.target.matches('.dropbtn')) {
+
+      var dropdowns = document.getElementsByClassName("dropdown-content");
+      var i;
+      for (i = 0; i < dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+        if (openDropdown.classList.contains('show')) {
+          openDropdown.classList.remove('show');
+        }
+      }
+    }
+  }
+
+
+  // DETERMINE CAR(s) REMAINING & REVENUE
+  function adjustNums() {
+    var carType = document.getElementById("carType").value;
+    switch (carType) {
+      console.log(carType)
+      default: // default case = Economy & add cost
+      if (cars.econNum == 0) { flashAlert() } else {
+        cars.econNum -= 1;
+        document.getElementById("carsEconNum").innerHTML = cars.econNum;
+        document.getElementById("econTotal").innerHTML = (revenue.econ +=
+          cars.econCost);
+      }
+      break;
+      case "Mids": // Subtract 1 from Mids inventory & add cost
+        if (cars.MidsNum == 0) { flashAlert() } else {
+          cars.midsNum -= 1;
+          document.getElementById("carsMidsNum").innerHTML = cars.midsNum;
+          document.getElementById("midsTotal").innerHTML = (revenue.mids +=
+            cars.midsCost);
+        }
+        break;
+      case "Lux": // Subtract 1 from Lux inventory & add cost
+        if (cars.luxNum == 0) { flashAlert() } else {
+          cars.luxNum -= 1;
+          document.getElementById("carsLuxNum").innerHTML = cars.luxNum;
+          document.getElementById("luxTotal").innerHTML = (revenue.lux +=
+            cars.luxCost);
+        }
+        break;
+    }
+    revenueTotal = revenue.econ + revenue.mids + revenue.lux;
+    inventoryOut += 1;
+    document.getElementById("revenueTotal").innerHTML = "US$ " + revenueTotal;
+    document.getElementById("inventoryOut").innerHTML = inventoryOut +
+      " Cars Rented";
+  }
+
+  </script>
+</body>

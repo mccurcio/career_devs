@@ -1,0 +1,256 @@
+C
+<!-- ar Rental - Form & Complex Object Project
+Due Nov 18
+Car Rental - Form & Complex Object Project
+
+
+Clifton Choiniere
+Nov 14 (Edited Nov 17)
+1 class comment
+Modify your car application to meet the requirements in the attached document.
+
+Car Rental - Form & Complex Object Project
+Google Docs
+Your work
+DONE
+
+index_center_biased_grid.html
+HTML
+UNSUBMIT
+Private comments
+
+Matt CurcioNov 18
+Checkout my REPO: https://github.com/mccurcio/career_devs_daily/tree/master/car_rental_form_upgrade
+
+Add private comment… -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+ 
+
+</head>
+
+<body>
+  <!-- NAVBAR ######################################## -->
+  <div class="container-fluid">
+    <div class="row container-fluid">
+      <div class="col-xs-12">
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <a class="navbar-brand" href="#">Matt's Car Rental</a>
+            </div>
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="#">Home</a></li>
+              <li><a href="#locations">Our Locations</a></li>
+              <li><a href="#cars">Our Cars</a></li>
+              <li><a href="#specials">Special Deals!</a></li>
+              <li><a href="#contact">Contact Us</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="#"><span class="glyphicon glyphicon-user"></span>Sign Up</a></li>
+              <li><a href="#"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <!-- DIRECTIONS, ROWS 1-2 ########################### -->
+  <div class="container">
+    <div class="col-sm-12">
+      <h2>You have reached the car rental page.</h2>
+      <h3>Step #1: Choose your type of car from the dropdown menu.</h3>
+    </div>
+  </div>
+  <!-- ROW #3 - DAYS & CAR DROPDOWNS ##################### -->
+  <div class="container">
+    <div class="row container">
+      <div class="col-xs-12">
+        <div class="container">
+          <form id="carType" name="carType">
+            <select id="carType" name="carType" onchange="adjustNums()">
+              <option style="display:none;" selected="selected">
+                Car Type Desired</option>
+              <option value="Econ">Economy Model at $50/day</option>
+              <option value="Mids">Mid-Size at $100/day</option>
+              <option value="Lux">Luxury Model at $200/day</option>
+            </select>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ROW #4 - FIRST_LAST_NAMES - FORM ##################### -->
+  <div class="container">
+    <div class="col-xs-12">
+      <h3>Step #2: Enter your name.</h3>
+      <br>
+      <div class="form-group row">
+        <form name="form2" class="form" enctype="text/plain" id="recordName">
+          <div class="form-group">
+            <label>Enter Name:</label>
+            <input placeholder="Enter Name" method="post" id="Name" name="Name" required="" type="text">
+          </div>
+          <button type="submit" onclick="customerInfo()" value="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- ROW #5 - CAR TABLE / INFORMATION ############## -->
+  <div class="container">
+    <div class="col-sm-12">
+      <h3>Today we have:</h3>
+      <!-- TABLE OF CARS #############################-->
+      <div class="container">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Car Type</th>
+              <th>Car(s) Remaining</th>
+              <th>Cost per Day</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Economy</td>
+              <td>
+                <p id="carsEconNum"></p>
+              </td>
+              <td>
+                <p id="econTotal"></p>
+              </td>
+            </tr>
+            <tr>
+              <td>Mid-Size</td>
+              <td>
+                <p id="carsMidsNum"></p>
+              </td>
+              <td>
+                <p id="midsTotal"></p>
+              </td>
+            </tr>
+            <tr>
+              <td>Luxury</td>
+              <td>
+                <p id="carsLuxNum"></p>
+              </td>
+              <td>
+                <p id="luxTotal"></p>
+              </td>
+            </tr>
+            <tr>
+              <td>TOTALS</td>
+              <td>
+                <p id="inventoryOut"></p>
+              </td>
+              <td>
+                <p id="revenueTotal"></p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- END OF TABLE ##############################-->
+    </div>
+  </div>
+  <!-- SCRIPTS - FUNCTIONS ##################### -->
+  <script>
+  // SET INITIAL VALUES
+  var customer = {Name: ""};
+  var cars = {
+    econNum: 5,
+    midsNum: 10,
+    luxNum: 2,
+    econCost: 50,
+    midsCost: 100,
+    luxCost: 200
+  };
+
+  // INITIALIZE VAUES IN TABLE
+  var revenue = {econ: 0, mids: 0, lux: 0};
+  var inventoryOut = 0;
+
+  // Car(s) Remaining
+  document.getElementById("carsEconNum").innerHTML = cars.econNum
+  document.getElementById("carsMidsNum").innerHTML = cars.midsNum
+  document.getElementById("carsLuxNum").innerHTML = cars.luxNum
+  // Revenue per Day
+  document.getElementById("econTotal").innerHTML = revenue.econ;
+  document.getElementById("midsTotal").innerHTML = revenue.mids;
+  document.getElementById("luxTotal").innerHTML = revenue.lux;
+
+  // GET FIRST_LAST_NAMES from form1
+  // function customerInfo() {
+  //   var carType = document.forms["carType"]["value"].value
+  //   var Name = document.forms["form2"]["Name"].value;
+  //   customer.Name.push(Name);
+  //   if (carType == "blank") {
+  //     alert("Please select type");
+  //   }
+  //   if (customer.fName.length == 0 & customer.FamName.length == 0) {
+  //     alert("Please Fill in your Name.");
+  //   } else {
+  //     alert("Thank you for your order.");
+  //   }
+    // var txt;
+    // if (confirm("Confirm Your Reservation:") == true) {
+    //   alert("I am an alert box!");
+    // } else {
+    //   alert("Your Order Is Canceled.");
+    // }
+  // }
+
+  // DETERMINE CAR(s) REMAINING & REVENUE
+  function adjustNums() {
+    var carType = document.getElementById("carType").value;
+    switch (carType) {
+       console.log(carType)
+      default: // default case = Economy & add cost
+        if (cars.econNum == 0) {
+          alert("Please Choose another car type.");
+        } else {
+          cars.econNum -= 1;
+          document.getElementById("carsEconNum").innerHTML = cars.econNum;
+          document.getElementById("econTotal").innerHTML = (revenue.econ +=
+            cars.econCost);
+        }
+      break;
+      case "Mids": // Subtract 1 from Mids inventory & add cost
+          if (cars.MidsNum == 0) {
+            alert("Please Choose another car type.");
+          } else {
+            cars.midsNum -= 1;
+            document.getElementById("carsMidsNum").innerHTML = cars.midsNum;
+            document.getElementById("midsTotal").innerHTML = (revenue.mids +=
+              cars.midsCost);
+          }
+        break;
+      case "Lux": // Subtract 1 from Lux inventory & add cost
+          if (cars.luxNum == 0) {
+            alert("Please Choose another car type.");
+          } else {
+            cars.luxNum -= 1;
+            document.getElementById("carsLuxNum").innerHTML = cars.luxNum;
+            document.getElementById("luxTotal").innerHTML = (revenue.lux +=
+              cars.luxCost);
+          }
+        break;
+    }
+    revenueTotal = revenue.econ + revenue.mids + revenue.lux;
+    document.getElementById("revenueTotal").innerHTML = "US$ " + revenueTotal;
+    inventoryOut += 1;
+    document.getElementById("inventoryOut").innerHTML = inventoryOut +
+      " Cars Rented";
+  }
+  </script>
+</body>
+
+</html>
+<!-- index_center_biased_grid.html
+Displaying index_center_biased_grid.html.
+ -->

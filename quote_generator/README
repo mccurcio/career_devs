@@ -1,0 +1,9 @@
+* fosimatic.html is my first attempt, I considered adding Google translations for RU to EN.
+
+* index.css
+
+* index.js - this contains the script to transfer quote to Twitter
+
+* test has css included in head but USES index.js for twitter events
+
+* The 'index_quote_gen.html is the final version.
