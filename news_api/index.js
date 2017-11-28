@@ -1,3 +1,26 @@
+
+// The GET request below does the same thing as the http request below. 
+// NO QUOTES
+// https://newsapi.org/v2/sources?category=business&country=us&language=en&apikey=abc123
+
+/* global $ */
+$(document).ready(function() {
+  $.ajax({
+      // method: "GET",
+      url: "https://newsapi.org/v2/sources",
+      data: {
+        category: "business",
+        country: "us",
+        language: "en",
+        apikey: "46d7b349a95e4d449f27ee7ec153af82"
+      }
+    })
+   .done(function(msg) {
+       console.log(msg);
+       console.log(data.status)
+})
+
+// NOTES
 // CHECK STATUS OF API
 // function getStatus() {
 //   var url = 'https://newsapi.org/v2/top-headlines?' +
@@ -18,21 +41,3 @@
 //     404: function() {alert( "page not found" )}
 //   }
 // });
-
-/* global $ */
-// The GET request below does the same thing as the http request below.
-// https://newsapi.org/v2/sources?category=business&country=us&language=en&apikey=abc123
-
-$(document).ready(function() {
-  $.ajax({
-      method: "GET",
-      url: "https://newsapi.org/v2/sources",
-      data: {
-        category: "business",
-        country: "us",
-        language: "en",
-        apikey: "46d7b349a95e4d449f27ee7ec153af82"
-      }
-    })
-   .done(function(msg) { alert("Data Saved: " + msg) });
-})

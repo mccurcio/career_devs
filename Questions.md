@@ -4,4 +4,4 @@ MCC's Questions
 
 2. How to use Inpsect fully?
 
-3. 
+3. What is the difference between the Bootstrap library which and the JQuery versions of buttons/nav bars, etc.
