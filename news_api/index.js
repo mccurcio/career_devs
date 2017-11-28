@@ -8,7 +8,7 @@ $(document).ready(function() {
     method: "GET",
     url: "https://newsapi.org/v2/sources",
     data: {
-      category: "business",
+      //category: "business",
       country: "us",
       language: "en",
       apikey: "46d7b349a95e4d449f27ee7ec153af82"
