@@ -72,7 +72,7 @@
       <div class="col-xs-12">
         <div class="container">
           <form name="carType">
-            <select id="carType" onchange="adjustNums()">
+            <select id="carType" name="carType" onchange="adjustNums()">
               <option style="display:none;" selected="selected">Car Type Desired</option>
               <option value="Econ">Economy Model at $50/day</option>
               <option value="Mids">Mid-Size at $100/day</option>
@@ -85,7 +85,7 @@
       </div>
     </div>
   </div>
-  <!-- ROW #4 - FIRST_LAST_NAMES - FORM ##################### -->
+  <!-- ROW #4 - FIRST_NAMES - FORM ##################### -->
   <div class="container">
     <div class="col-xs-12">
       <h3>Step #2: Enter your name.</h3>
@@ -95,7 +95,7 @@
           <div class="form-group">
             <label>First Name:</label>
             <input placeholder="Enter First Name" method="post" id="fName" name="fName" required="" type="text">
-          <button type="submit" onclick="customerInfo()" value="submit">Submit</button>
+          <button type="submit" onclick="addRenter()" value="submit">Submit</button>
           </div>
         </form>
       </div>
@@ -188,31 +188,31 @@
     revenue.lux);
 
   // Get FIRST_LAST_NAMES from form
-  function customerInfo() {
-    var choices = ("Econ", "Mids", "Lux")
-    var carType = document.getElementById("carType").value;
-    var firstName = document.forms["form"]["fName"].value;
-    customer.fName.push(firstName);
-    if (!(id in choices)) {alert("Please select car type")}
-    if (customer.fName.length == 0) {
-      alert("Please fill in your Name.");
-    } else {
-      alert("Thank you for your order.");
-    }
+  // function customerInfo() {
+  //   var choices = ("Econ", "Mids", "Lux");
+  //   var carType = document.getElementById("carType").value;
+  //   // var firstName = document.forms["form"]["fName"].value;
+  //   // customer.fName.push(firstName);
+  //   if (!(carType in choices)) {alert("Please select car type")}
+  //   if (customer.fName.length == 0) {
+  //     alert("Please fill in your Name.");
+  //   } else {
+  //     alert("Thank you for your order.");
+  //   }
     // var txt;
     // if (confirm("Confirm Your Reservation:") == true) {
     //   alert("I am an alert box!");
     // } else {
     //   alert("Your Order Is Canceled.");
     // }
-  }
+  // }
 
-
+// 
   function ShowAlert() {
     alert("Please Choose another car type.")
   }
 
-  // Determine Car(s) Remaining & Revenue
+  // Determine Car(s) Remaining & Revenue ########################
   function adjustNums() {
     var carType = document.getElementById("carType").value;
     switch (carType) {
@@ -250,6 +250,32 @@
     document.getElementById("inventoryOut").innerHTML = inventoryOut +
       " Cars Rented";
   }
+
+function addRenter() {
+    var selection = document.forms["fname"]["carSelection"].value;
+    var renter = document.forms["fname"]["name"].value;
+    var economy = cars.economy;
+    var midsize = cars.midsize;
+    var luxury = cars.luxury;
+  
+    if (selection == "blank") {
+        alert("Please select type");
+        console.log(selection);
+    }
+    else if (renter == "") {
+        alert("Please enter name");
+        console.log(renter);
+    }
+    else {
+        rental[selection].push({
+            name: renter
+        });
+        document.getElementById("display").innerHTML = "Thank you for your reservation!";
+        console.log(rental);
+    }
+    return false;
+
+
   </script>
 </body>
 

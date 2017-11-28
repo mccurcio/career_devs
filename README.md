@@ -16,4 +16,4 @@ The dated files starting on Nov. 2, 2017 onward are daily exercises carried out 
 
 - Quote machine uisng forismatic.com api
 
--
+- folder/news_api is a fork of Cliff's github project
