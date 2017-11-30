@@ -9,8 +9,8 @@ MCC's Questions
 4. Explain passing variables into a function.
 
 5. Where are the JS libraires?
- * https://www.javascripting.com/
- * https://en.wikipedia.org/wiki/List_of_JavaScript_libraries
+   * https://www.javascripting.com/
+   * https://en.wikipedia.org/wiki/List_of_JavaScript_libraries
  
 6. <strong>XMLHttpRequest (XHR)</strong> is an API in the form of an object whose methods transfer data between a web browser and a web server. The object is provided by the browser's JavaScript environment.
 
