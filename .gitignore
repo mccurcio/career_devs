@@ -1,0 +1,5 @@
+# Ignore these following files/dirs
+
+mcc_talk/*
+
+news_api/key.js
