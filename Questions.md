@@ -24,3 +24,7 @@ MCC's Questions
 
 11. dif between onclick and onsubmit?
 
+12. What does form inside the computer?
+
+13. JQuery is a DOM Traversal library
+

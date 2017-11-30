@@ -5,16 +5,17 @@
 /*global $*/
 $(document).ready(function() {
   $.ajax({
-    method: "GET",
-    url: "https://newsapi.org/v2/sources",
+    // method: "GET",
+    url: "https://newsapi.org/v2/top-headlines",
     data: {
-      //category: "business",
+      category: "business",
       country: "us",
       language: "en",
-      apikey: "46d7b349a95e4d449f27ee7ec153af82"
+      apikey: APIKEY
     },
     success: function(response) {
-      if (data.status === "ok") {
+      console.log(response);
+      if (response.status === "ok") {
         for (var i = 0; i < response.sources.length; i++) {
           var source = document.createElement("OPTION");
           // createElement"OPTION"
@@ -28,7 +29,29 @@ $(document).ready(function() {
     }
 
   })
-  // .done(function(msg) {
-  //     console.log(msg);
-  //     console.log(data.status)
+
+  function displayNews(source) {
+    $.ajax({
+      method: "GET",
+      url: "https://newsapi.org/v2/top-headlines?sources=" + source,
+      data: { apiKey: APIKEY },
+      success: function(response, test) {
+        for (var i = 0; i < response.articles.length; i++) {
+          var work = document.createElement("P");
+          var orked = document.createElement("P");
+          pleaseWork.innerHTML = response.articles[i].title +
+            "<br>" + response.articles[i].description;
+          document.getElementById('comeOn').appendChild(pleaseWork);
+          pleaseWork.setAttribute('id', i);
+        }
+      }
+    });
+
+  }
+
+  $('#source').submit(function(e) {
+    event.preventDefault();
+    displayNews(document.getElementById("selection").value);
+  });
+
 })
