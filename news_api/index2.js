@@ -1,6 +1,4 @@
-/* global $ APIKEY*/ 
-/* global notation can be use outside of jQuery, 
-if var are in another js file.*/
+/* global $ APIKEY*/ /* global notation can be use outside of jQuery, if var are in another js file.*/
 $(document).ready(function() {
     $.ajax({
         method: "GET",
