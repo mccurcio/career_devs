@@ -20,11 +20,12 @@ MCC's Questions
 
 9. Does parseInt need square brackets?
 
-10. Does forms pull up only IDs?
+10. Does forms pull up only IDs? What does Forms do behind the scenes? What does form inside the computer?
 
-11. dif between onclick and onsubmit?
 
-12. What does form inside the computer?
+11. What is the dif. between onclick and onsubmit?
+
+12. 
 
 13. JQuery is a DOM Traversal library
 

@@ -1,22 +1,22 @@
 var cars = {
   type: [{
       name: "Econo",
-      price: "$75.00",
+      price: "$50.00",
       available: 1
     },
     {
       name: "Mid-Size",
-      price: "$120.00",
+      price: "$100.00",
       available: 2
     },
     {
       name: "Luxury",
-      price: "$250.00",
+      price: "$200.00",
       available: 1
     },
     {
       name: "Truck",
-      price: "$150.00",
+      price: "$99.00",
       available: 5
     }
   ],
