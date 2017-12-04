@@ -3,7 +3,7 @@
 $(document).ready(function(){
   $.ajax({
     method: "GET",
-    url: "https://newsapi.org/v2/top-headlines",
+    url: "https://newsapi.org/v2/sources",
     data: {category: "business",
            country: "us",
            language: "en",
@@ -21,32 +21,39 @@ $(document).ready(function(){
           // child will be spawned in getElementById("selection")
           source.setAttribute("value", response.sources[i].id);
         }
-      } 
-      else {alert(data.message)}
+       }
     }
-
   })
 
-  $("#source").submit(function(event) {
-        event.preventDefault();
-        var value = document.getElementById("selection").value;
-        $.ajax({
-            method: "GET",
-            url: "https://newsapi.org/v2/top-headlines",
-            data: { sources: value, apiKey: APIKEY },
-            success: function(data) {
-                for (var i = 0; i < data.articles.length; i++) {
-                    console.log("start")
-                    var display = document.createElement("LI");
-                    display.innerHTML = data.articles[i].title;
-                    document.getElementById("display").appendChild(display);
-                }
-                console.log(data);
-            }
-        });
-    });
   $("#source").submit(function(event){
     event.preventDefault();
-    displayNews(document.getElementById("selection").value);
+    // prevents submit btn and uses ajax
+    var sourceId = document.getElementById("selection").value;
+    //alert(document.getElementById("selection").value)
+    var articles = document.getElementById("headlines");
+    // get value of news organization from dropdown
+    while (articles.firstChild){articles.removeChild(articles.firstChild)}; 
+    // while articles.firstChild is present/true do nothing.
+    // get articles via ajax
+    $.ajax({ // Second ajax call for headlines
+      method: "GET",
+      url: "https://newsapi.org/v2/top-headlines",
+      data: {sources: sourceId, 
+             apiKey: APIKEY
+            },
+      success: function(response){
+        // console.log(response) // check data.status
+        for (var i = 0; i < response.articles.length; i++){
+        // for number of articles via length
+          var articles = document.createElement("LI");
+          // creating line item
+          articles.setAttribute("value", response.articles[i].title);
+          // set atributes so that they can be printed on screen via innerHTML
+          articles.innerHTML = response.articles[i].title;
+          document.getElementById("headlines").appendChild(articles);
+          //add children onto parent node-"OPTION".
+        }
+      }
+    });
   });
-})
+});

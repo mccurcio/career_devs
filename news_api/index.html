@@ -2,23 +2,30 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>NewsAPI MCC</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <title>Matt's NewsAPI</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
 
 <body>
     <div class="container">
         <form id="source">
             <br>
+            <div class="well"> 
+              <h4><u>Matt's New(s) Feed:</u></h4>
+              <h5>This news application allows one to view headlines from several news organizations.<br><br>
+              <u>Step #1: Choose the news organization from the dropdown menu.</u>
+              </h5>
+            </div>
             <div class="form-group">
                 <select id="selection">
                     <!-- OPTION(S) will be added dynamically via createElement("OPTION") in index.js -->
                 </select>
+             <button type="submit" class="btn btn-primary">Submit</button>   
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
         </form>
-        <br>
-        <div>
+        <div class="well"> 
+          <h5><u>Step #2: Use <strong>Submit</strong> to view the top headlines here...</u></h5>
           <h4 id="headlines"></h4>
         </div>
     </div>
@@ -26,8 +33,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- Bootstrap -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    
     <!-- Pointer to Javascript Code -->
     <script src="key.js"></script>
-    <script src="index3.js"></script>
+    <script src="index.js"></script>
 </body>
 </html>
