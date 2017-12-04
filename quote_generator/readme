@@ -6,4 +6,4 @@
 
 * test has css included in head but USES index.js for twitter events
 
-* The 'index_quote_gen.html is the final version.
+* The 'index.html' is the final version.
